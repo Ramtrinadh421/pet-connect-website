@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Details - Pet Connect</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #fdfcfb, #e2d1c3);
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #ff6f61;
+      padding: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 10px 0 0;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 12px;
+    }
+
+    nav ul a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .pet-details-container {
+      max-width: 700px;
+      margin: 40px auto;
+      background-color: #ffffffbb;
+      padding: 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    .pet-details-container img {
+      width: 100%;
+      max-width: 500px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .pet-details-container h2 {
+      font-size: 2.2em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .pet-details-container p {
+      font-size: 1.1em;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 12px 25px;
+      background-color: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #e85b4d;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background-color: #f3f3f3;
+      color: #666;
+      margin-top: 40px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🐾 Pet Connect</h1>
+    <nav>
+      <ul>
+        <li><a href="home.html">Home</a></li>
+        <li><a href="index.html">Login</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="pet-details-container" id="pet-container">
+    <h2 id="pet-name">Loading...</h2>
+    <img id="pet-image" src="" alt="Pet Image" />
+    <p id="pet-description">Fetching details...</p>
+    <a href="home.html" class="btn">← Back to Home</a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Pet Connect. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const pets = {
+      fluffy: {
+        name: "Fluffy the Cat",
+        image: "images/cat.jpeg",
+        description: "Fluffy is a gentle and cuddly cat who loves naps and head scratches."
+      },
+      buddy: {
+        name: "Buddy the Dog",
+        image: "images/dog.jpeg",
+        description: "Buddy is loyal, playful, and always ready for fetch."
+      },
+      snowy: {
+        name: "Snowy the Rabbit",
+        image: "images/rabbit.jpeg",
+        description: "Snowy enjoys carrots and hopping around the garden."
+      },
+      polly: {
+        name: "Polly the Parrot",
+        image: "images/riz and joe.jpeg",
+        description: "Polly is colorful, talkative, and loves company."
+      }
+    };
+
+    const query = new URLSearchParams(window.location.search);
+    const petId = query.get("id");
+
+    const container = document.getElementById("pet-container");
+
+    if (pets[petId]) {
+      const pet = pets[petId];
+      document.getElementById("pet-name").textContent = pet.name;
+      document.getElementById("pet-image").src = pet.image;
+      document.getElementById("pet-description").textContent = pet.description;
+    } else {
+      container.innerHTML = `
+        <h2>Pet Not Found</h2>
+        <p>We couldn't find the pet you're looking for.</p>
+        <a href="home.html" class="btn">← Back to Home</a>
+      `;
+    }
+  </script>
+</body>
+</html>

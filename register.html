@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register - Pet Connect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(14px);
+      border-radius: 20px;
+      padding: 40px 30px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.8rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+      width: 90%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 95%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #00c9a7;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #009e83;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: underline;
+      display: block;
+      margin-top: 18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Create Your Pet Connect Account</h2>
+    <form id="registerForm">
+      <input type="text" id="new-username" placeholder="Username" required /><br />
+      <input type="password" id="new-password" placeholder="Password" required /><br />
+      <button type="submit">Register</button>
+    </form>
+    <a href="index.html">Already have an account? Login</a>
+  </div>
+
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("new-username").value.trim();
+      const password = document.getElementById("new-password").value.trim();
+
+      if (username && password) {
+        // Save to localStorage (basic mock system)
+        localStorage.setItem("registeredUser", username);
+        localStorage.setItem("registeredPass", password);
+        alert("Registered successfully! You can now log in.");
+        window.location.href = "index.html";
+      } else {
+        alert("Please fill in all fields.");
+      }
+    });
+  </script>
+</body>
+</html>

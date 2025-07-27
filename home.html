@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pet Connect - Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #fdf6ec;
+    }
+
+    .header {
+      background-color: #ff6f61;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: white;
+    }
+
+    .header h1 {
+      margin: 0;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li a, nav ul li span {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .hero {
+      background: linear-gradient(to right, #ffe0b2, #ffccbc);
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #333;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .gallery {
+      padding: 50px 20px;
+      text-align: center;
+    }
+
+    .gallery h3 {
+      font-size: 1.8rem;
+      color: #444;
+      margin-bottom: 30px;
+    }
+
+    .pet-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      justify-content: center;
+    }
+
+    .pet-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .pet-card:hover {
+      transform: scale(1.05);
+    }
+
+    .pet-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-top-left-radius: 12px;
+      border-top-right-radius: 12px;
+    }
+
+    .pet-card p {
+      margin: 0;
+      padding: 12px;
+      background: #ffe4b5;
+      font-weight: bold;
+      border-bottom-left-radius: 12px;
+      border-bottom-right-radius: 12px;
+      color: #333;
+    }
+
+    footer {
+      background: #ff6f61;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <h1>🐾 Pet Connect</h1>
+    <nav>
+      <ul id="nav-links">
+        <li><a href="index.html" id="login-link">Login</a></li>
+        <li><a href="register.html">Register</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Connect With Your Perfect Pet!</h2>
+    <p>Explore and find your new best friend from our wide collection of adorable animals.</p>
+  </section>
+
+  <section class="gallery">
+    <h3>Featured Pets</h3>
+    <div class="pet-grid">
+      <div class="pet-card" onclick="openPetDetail('fluffy')">
+        <img src="images/kitten.jpeg" alt="Fluffy the Cat">
+        <p>Fluffy the Cat</p>
+      </div>
+
+      <div class="pet-card" onclick="openPetDetail('buddy')">
+        <img src="images/dog3.jpeg" alt="Buddy the Dog">
+        <p>Buddy the Dog</p>
+      </div>
+
+      <div class="pet-card" onclick="openPetDetail('snowy')">
+        <img src="images/rabbit.jpeg" alt="Snowy the Rabbit">
+        <p>Snowy the Rabbit</p>
+      </div>
+
+      <div class="pet-card" onclick="openPetDetail('parrot')">
+        <img src="images/riz&joe.jpg" alt="Riz & Joe the Parrots">
+        <p>Riz & Joe the Parrots</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Pet Connect. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const navLinks = document.getElementById("nav-links");
+
+    if (isLoggedIn === "true") {
+      const currentUser = localStorage.getItem("currentUser") || "User";
+      navLinks.innerHTML = `
+        <li><span>Welcome, ${currentUser}!</span></li>
+        <li><a href="#" onclick="logout()">Logout</a></li>
+      `;
+    }
+
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    }
+
+    function openPetDetail(petId) {
+      if (localStorage.getItem("isLoggedIn") === "true") {
+        window.location.href = `pet-details.html?id=${petId}`;
+      } else {
+        alert("Please log in to view pet details.");
+        window.location.href = "index.html";
+      }
+    }
+  </script>
+</body>
+</html>
