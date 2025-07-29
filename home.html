@@ -41,6 +41,20 @@
       cursor: pointer;
     }
 
+    .support-link {
+      background-color: #fff;
+      color: #ff6f61 !important;
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .support-link:hover {
+      background-color: #ffe0b2;
+    }
+
     .hero {
       background: linear-gradient(to right, #ffe0b2, #ffccbc);
       text-align: center;
@@ -121,7 +135,7 @@
     <h1>🐾 Pet Connect</h1>
     <nav>
       <ul id="nav-links">
-        <!-- Content will be injected by JS -->
+        <!-- Content injected by JS -->
       </ul>
     </nav>
   </header>
@@ -138,17 +152,14 @@
         <img src="images/kitten.jpeg" alt="Fluffy the Cat">
         <p>Fluffy the Cat</p>
       </div>
-
       <div class="pet-card" onclick="openPetDetail('buddy')">
         <img src="images/dog3.jpeg" alt="Buddy the Dog">
         <p>Buddy the Dog</p>
       </div>
-
       <div class="pet-card" onclick="openPetDetail('snowy')">
         <img src="images/rabbit.jpeg" alt="Snowy the Rabbit">
         <p>Snowy the Rabbit</p>
       </div>
-
       <div class="pet-card" onclick="openPetDetail('parrot')">
         <img src="images/riz&joe.jpg" alt="Riz & Joe the Parrots">
         <p>Riz & Joe the Parrots</p>
@@ -161,7 +172,6 @@
   </footer>
 
   <script>
-    // 🔐 Secure Access
     const isLoggedIn = localStorage.getItem("isLoggedIn");
     const currentUser = localStorage.getItem("currentUser");
     const navLinks = document.getElementById("nav-links");
@@ -170,9 +180,9 @@
       alert("You must be logged in to access the home page.");
       window.location.href = "index.html";
     } else {
-      // Inject user info and logout
       navLinks.innerHTML = `
         <li><span>Welcome, ${currentUser}!</span></li>
+        <li><a class="support-link" href="support.html">Support</a></li>
         <li><a onclick="logout()">Logout</a></li>
       `;
     }
@@ -184,7 +194,7 @@
     }
 
     function openPetDetail(petId) {
-      window.location.href = `pet-details.html?id=${petId}`;
+      window.location.href = \`pet-details.html?id=\${petId}\`;
     }
   </script>
 </body>
