@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,19 +89,25 @@
   <script>
     document.getElementById("loginForm").addEventListener("submit", function (e) {
       e.preventDefault();
+
       const username = document.getElementById("username").value.trim();
       const password = document.getElementById("password").value.trim();
+      const errorMessage = document.getElementById("error-message");
 
-      // Basic mock login (you can replace this with real authentication later)
-      const validUser = "admin";
-      const validPass = "12345";
+      const storedUser = localStorage.getItem("user_" + username);
 
-      if (username === validUser && password === validPass) {
-        localStorage.setItem("isLoggedIn", "true");
-        alert("Login successful!");
-        window.location.href = "home.html";
+      if (storedUser) {
+        const user = JSON.parse(storedUser);
+        if (user.password === password) {
+          localStorage.setItem("isLoggedIn", "true");
+          localStorage.setItem("currentUser", user.username);
+          alert("Login successful!");
+          window.location.href = "home.html";
+        } else {
+          errorMessage.textContent = "Incorrect password.";
+        }
       } else {
-        document.getElementById("error-message").textContent = "Invalid username or password.";
+        errorMessage.textContent = "User not found. Please register.";
       }
     });
   </script>
