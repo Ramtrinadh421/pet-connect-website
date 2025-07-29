@@ -38,6 +38,7 @@
       text-decoration: none;
       font-weight: bold;
       font-size: 1rem;
+      cursor: pointer;
     }
 
     .hero {
@@ -120,8 +121,7 @@
     <h1>🐾 Pet Connect</h1>
     <nav>
       <ul id="nav-links">
-        <li><a href="index.html" id="login-link">Login</a></li>
-        <li><a href="register.html">Register</a></li>
+        <!-- Content will be injected by JS -->
       </ul>
     </nav>
   </header>
@@ -161,14 +161,19 @@
   </footer>
 
   <script>
+    // 🔐 Secure Access
     const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const currentUser = localStorage.getItem("currentUser");
     const navLinks = document.getElementById("nav-links");
 
-    if (isLoggedIn === "true") {
-      const currentUser = localStorage.getItem("currentUser") || "User";
+    if (isLoggedIn !== "true") {
+      alert("You must be logged in to access the home page.");
+      window.location.href = "index.html";
+    } else {
+      // Inject user info and logout
       navLinks.innerHTML = `
         <li><span>Welcome, ${currentUser}!</span></li>
-        <li><a href="#" onclick="logout()">Logout</a></li>
+        <li><a onclick="logout()">Logout</a></li>
       `;
     }
 
@@ -179,12 +184,7 @@
     }
 
     function openPetDetail(petId) {
-      if (localStorage.getItem("isLoggedIn") === "true") {
-        window.location.href = `pet-details.html?id=${petId}`;
-      } else {
-        alert("Please log in to view pet details.");
-        window.location.href = "index.html";
-      }
+      window.location.href = `pet-details.html?id=${petId}`;
     }
   </script>
 </body>
