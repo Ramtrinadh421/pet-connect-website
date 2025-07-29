@@ -6,14 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to right, #43cea2, #185a9d);
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
+      margin: 0;
     }
 
     .form-container {
@@ -28,19 +27,15 @@
     }
 
     .form-container h2 {
-      margin-bottom: 20px;
       color: #fff;
-      font-size: 1.8rem;
     }
 
-    input[type="text"],
-    input[type="password"] {
+    input {
       width: 90%;
       padding: 12px;
       margin: 10px 0;
       border: none;
       border-radius: 10px;
-      outline: none;
       font-size: 1rem;
     }
 
@@ -55,7 +50,6 @@
       font-size: 1rem;
       font-weight: bold;
       cursor: pointer;
-      transition: background-color 0.3s;
     }
 
     button:hover {
@@ -68,15 +62,23 @@
       display: block;
       margin-top: 18px;
     }
+
+    #register-message {
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="form-container">
     <h2>Create Your Pet Connect Account</h2>
     <form id="registerForm">
-      <input type="text" id="new-username" placeholder="Username" required /><br />
-      <input type="password" id="new-password" placeholder="Password" required /><br />
+      <input type="text" id="regUsername" placeholder="Username" required />
+      <input type="email" id="regEmail" placeholder="Email" required />
+      <input type="password" id="regPassword" placeholder="Password" required />
+      <input type="password" id="regConfirmPassword" placeholder="Confirm Password" required />
       <button type="submit">Register</button>
+      <p id="register-message"></p>
     </form>
     <a href="index.html">Already have an account? Login</a>
   </div>
@@ -84,18 +86,32 @@
   <script>
     document.getElementById("registerForm").addEventListener("submit", function (e) {
       e.preventDefault();
-      const username = document.getElementById("new-username").value.trim();
-      const password = document.getElementById("new-password").value.trim();
+      const username = document.getElementById("regUsername").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const password = document.getElementById("regPassword").value.trim();
+      const confirmPassword = document.getElementById("regConfirmPassword").value.trim();
+      const message = document.getElementById("register-message");
 
-      if (username && password) {
-        // Save to localStorage (basic mock system)
-        localStorage.setItem("registeredUser", username);
-        localStorage.setItem("registeredPass", password);
-        alert("Registered successfully! You can now log in.");
-        window.location.href = "index.html";
-      } else {
-        alert("Please fill in all fields.");
+      if (password !== confirmPassword) {
+        message.textContent = "Passwords do not match.";
+        message.style.color = "red";
+        return;
       }
+
+      if (localStorage.getItem("user_" + username)) {
+        message.textContent = "Username already exists.";
+        message.style.color = "red";
+        return;
+      }
+
+      const user = { username, email, password };
+      localStorage.setItem("user_" + username, JSON.stringify(user));
+      message.textContent = "Registration successful! Redirecting to login...";
+      message.style.color = "lightgreen";
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 1500);
     });
   </script>
 </body>
