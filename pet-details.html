@@ -82,6 +82,33 @@
       background-color: #e85b4d;
     }
 
+    .pet-rules-container {
+      background: #fff3e0;
+      border-left: 6px solid #ff6f61;
+      padding: 25px;
+      margin: 30px auto;
+      max-width: 700px;
+      border-radius: 10px;
+      font-family: 'Segoe UI', sans-serif;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .pet-rules-container h3 {
+      color: #ff6f61;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+    }
+
+    .pet-rules-container ul {
+      padding-left: 20px;
+    }
+
+    .pet-rules-container ul li {
+      margin-bottom: 10px;
+      color: #444;
+      line-height: 1.6;
+    }
+
     footer {
       text-align: center;
       padding: 20px;
@@ -107,6 +134,20 @@
     <img id="pet-image" src="" alt="Pet Image" />
     <p id="pet-description">Fetching details...</p>
     <a href="home.html" class="btn">← Back to Home</a>
+  </div>
+
+  <!-- Pet Rules Section -->
+  <div class="pet-rules-container">
+    <h3>📋 Adoption Requirements & Pet Info</h3>
+    <ul>
+      <li>✅ Upload a recent health certificate (issued within 6 months).</li>
+      <li>🐾 Mention if the pet is orphaned, rescued, or surrendered.</li>
+      <li>📅 Include approximate age and full vaccination record.</li>
+      <li>📍 Provide the current location (shelter, foster, etc.).</li>
+      <li>🧾 Describe personality, habits, and any special needs.</li>
+      <li>📷 Include clear images showing the pet's condition.</li>
+      <li>📞 List contact details for adoption-related queries.</li>
+    </ul>
   </div>
 
   <footer>
@@ -150,9 +191,10 @@
     } else {
       container.innerHTML = `
         <h2>Pet Not Found</h2>
-        <p>We couldn't find the pet you're looking for.</p>
+        <p>Sorry, we couldn't find the pet you're looking for. Please return to the home page.</p>
         <a href="home.html" class="btn">← Back to Home</a>
       `;
+      document.querySelector(".pet-rules-container").style.display = "none";
     }
   </script>
 </body>
